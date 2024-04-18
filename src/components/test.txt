@@ -1,0 +1,15 @@
+    {menuItems.map((list, index) => {
+              return (
+                <Link to={list.path} key={index + 1}>
+                  <li
+                    className={`${
+                      list.style === "Active" &&
+                      "bg-colors-quantum-silver/50 rounded-sm"
+                    } p-1`}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {list.name}
+                  </li>
+                </Link>
+              );
+            })}
