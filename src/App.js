@@ -12,9 +12,9 @@ function App() {
       <Header />
 
       {/* routing component */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
     </Router>
   );
 }

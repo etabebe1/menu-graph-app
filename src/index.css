@@ -18,3 +18,17 @@ body {
     font-family: "Open Sans", sans-serif;
   }
 }
+
+.header {
+  height: 64px; /* Example fixed height */
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1000; /* High index to keep on top */
+}
+
+.home {
+  width: 100%;
+  height: calc(100vh - 64px);
+  overflow: auto;
+}

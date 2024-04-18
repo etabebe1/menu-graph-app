@@ -35,7 +35,7 @@ function Header() {
     },
   ];
 
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [listStyle, setListStyle] = useState(menuItems[0].name);
 
   const handleNavigation = (path, name) => {
@@ -48,12 +48,13 @@ function Header() {
   };
 
   return (
-    <header>
+    <header className="header">
       <nav className="z-50" aria-label="Main navigation">
         <div
-          className={`slider-component sm:hidden block w-full sm:w-full  h-[100vh] sm:h-[64px]  bg-colors-digital-gray/25 absolute backdrop-blur-sm ${
+          className={`slider-component sm:hidden block w-full sm:w-full  h-[100vh] sm:h-[64px]  bg-colors-digital-gray/25 absolute ${
             isOpen ? " left-0" : "-left-full"
           } z-50 transition-all duration-300`}
+          style={{ backdropFilter: "blur(1px)" }}
           onClick={() => setIsOpen(false)}
           role="dialog"
           aria-modal="true"
@@ -109,7 +110,12 @@ function Header() {
                   alt="EPhone App Logo"
                   className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl group-hover:scale-105 transition-all"
                 />
-                <h1 className="text-colors-matrix-green text-xl font-semibold group-hover:text-colors-matrix-green/90 transition-all">
+                <h1
+                  className="text-colors-cloud-compute-white text-xl font-semibold transition-all"
+                  style={{
+                    textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+                  }}
+                >
                   EPhone App
                 </h1>
               </div>
@@ -120,7 +126,7 @@ function Header() {
               <ul className="space-x-2 md:space-x-5 lg:space-x-10 flex justify-center items-center">
                 {menuItems.map((list, index) => {
                   return (
-                    <Link to={`${list.path}`} key={index}>
+                    <Link to={`#`} key={index + 1}>
                       <button
                         className="text-lg"
                         aria-label={`Navigate to ${list.name}`}
