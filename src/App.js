@@ -1,21 +1,14 @@
 import React from "react";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// Importing Components
-import Home from "./pages/Home";
-import Header from "./components/Header";
+import LeftPanel from "./components/LeftPanel";
+import CenterPanel from "./components/CentralPanel";
 
 function App() {
   return (
-    <Router>
-      {/* header component */}
-      <Header />
-
-      {/* routing component */}
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-    </Router>
+    <div className="app flex-1 flex flex-col sm:flex-row w-[100vw] overflow-x-hidden">
+      <LeftPanel />
+      <CenterPanel />
+    </div>
   );
 }
 
