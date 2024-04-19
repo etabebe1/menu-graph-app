@@ -1,30 +1,34 @@
 import React, { useState } from "react";
 
-import { MdCheckCircleOutline } from "react-icons/md";
-
 function LeftPanel() {
   const [text, setText] = useState(false);
   const [inputText, setInputText] = useState("");
+  const [menuItems, setMenuItems] = useState([]);
 
   // LOGS:
   // console.log(text);
 
-  const handleTextChange = (evt) => {
-    setInputText(evt.target.value);
+  const handleInputChange = (event) => {
+    // console.log(event.target.value);
+    setInputText(event.target.value);
   };
 
-  const handleGenerateMenu = (evt) => {
-    evt.preventDefault();
-    if (inputText === "") {
-      alert("Please enter some text");
-      return;
+  const handleExtractClick = () => {
+    extractMenuItems(inputText);
+  };
+
+  const extractMenuItems = (text) => {
+    const regex = /(\b\d+\.\s)([^\d\n.]+)(?=\s|$)/g;
+    const items = [];
+    let match;
+
+    while ((match = regex.exec(text)) !== null) {
+      items.push({ number: match[1].trim(), text: match[2].trim() });
     }
 
-    setText(true);
-    setTimeout(() => {
-      setText(false);
-      setInputText("");
-    }, 2000);
+    // console.log(items, text);
+
+    setMenuItems(items);
   };
 
   return (
@@ -35,31 +39,39 @@ function LeftPanel() {
       <div className="relative max-w-md mx-auto">
         <h1 className="font-semibold">1. Menu Extraction</h1>
         <div className="text-input max-w-md mx-auto p-4 bg-white/50 backdrop-blur-lg border border-white/50 rounded-lg shadow-md mt-5">
-          <form onSubmit={handleGenerateMenu}>
-            <textarea
-              className="w-full h-40 p-2 bg-white/60 outline-none text-colors-digital-gray/90 rounded-md border border-colors-digital-gray/20 focus:ring focus:ring-colors-matrix-green focus:ring-opacity-50"
-              style={{ boxShadow: "1px 1px 50px rgba(0, 0, 0, 0.1)" }}
-              value={inputText}
-              onChange={(evt) => handleTextChange(evt)}
-              placeholder="Paste your menu text here."
-            />
-            <button
-              className="mt-4 w-full bg-colors-matrix-green/80 hover:bg-colors-matrix-green text-white font-bold py-2 px-4 rounded"
-              type="submit"
-            >
-              Extract
-            </button>
+          <textarea
+            className="w-full h-40 p-2 bg-white/60 outline-none text-colors-digital-gray/90 rounded-md border border-colors-digital-gray/20 focus:ring focus:ring-colors-matrix-green focus:ring-opacity-50"
+            style={{ boxShadow: "1px 1px 50px rgba(0, 0, 0, 0.1)" }}
+            value={inputText}
+            onChange={(evt) => handleInputChange(evt)}
+            placeholder="Paste your menu text here."
+          />
+          <button
+            onClick={handleExtractClick}
+            className="mt-4 w-full bg-colors-matrix-green/80 hover:bg-colors-matrix-green text-white font-bold py-2 px-4 rounded"
+            type="submit"
+          >
+            Extract
+          </button>
 
-            <p className="text-xs mb-5">
-              With the extractor button, each line will be identified to the
-              menu items.
+          <p className="text-xs mb-5">
+            With the extractor button, each line will be identified to the menu
+            items.
+          </p>
+          {text && (
+            <p className="text-red-500 text-sm animate-vibrate">
+              No valid menu items found. Please check and try again.
             </p>
-            {text && (
-              <p className="text-red-500 text-sm animate-vibrate">
-                No valid menu items found. Please check and try again.
-              </p>
-            )}
-          </form>
+          )}
+
+          <h2>Extracted Menu Items:</h2>
+          <ul>
+            {menuItems.map((item, index) => (
+              <li key={index}>
+                {item.number}. {item.text}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </main>
