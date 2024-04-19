@@ -28,8 +28,12 @@ function LeftPanel() {
   };
 
   return (
-    <main className="bg-colors-quantum-silver/30 h-[70vh] sm:h-[100vh] sm:w-2/3 md:w-1/3 pt-[64px]">
+    <main
+      className="bg-colors-quantum-silver/30 h-[70vh] sm:h-[100vh] sm:w-2/3 md:w-1/3 pt-[64px]"
+      style={{ height: "calc(100vh - 64px)" }}
+    >
       <div className="relative max-w-md mx-auto">
+        <h1 className="font-semibold">1. Menu Extraction</h1>
         <div className="text-input max-w-md mx-auto p-4 bg-white/50 backdrop-blur-lg border border-white/50 rounded-lg shadow-md mt-5">
           <form onSubmit={handleGenerateMenu}>
             <textarea
