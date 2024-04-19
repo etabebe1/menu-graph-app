@@ -34,95 +34,33 @@ body {
 }
 
 /* General Reset and Base Styles */
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
 }
 
-.app {
-  display: flex;
-  min-height: 100vh;
+@keyframes vibrate {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    transform: translateX(-5px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5px);
+  }
 }
 
-/* Left Panel Styles */
-.left-panel {
-  width: 320px;
-  background-color: #f7f7f7;
-  border-right: 2px solid #ccc;
-  padding: 20px;
-  overflow: auto;
-}
-
-.left-panel textarea {
-  width: 100%;
-  height: 200px;
-  margin-bottom: 10px;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  resize: none;
-}
-
-.left-panel button {
-  width: 100%;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #0056b3;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.left-panel button:hover {
-  background-color: #004494;
-}
-
-.left-panel div {
-  margin-top: 10px;
-}
-
-/* Center Panel Styles */
-.center-panel {
-  flex-grow: 1;
-  position: relative; /* ReactFlow uses absolute positioning for its children */
-}
-
-/* Node Styles for ReactFlow */
-.react-flow__node-default {
-  background-color: white;
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-}
-
-/* Edge Styles for ReactFlow */
-.react-flow__edge-path {
-  stroke: #888;
-  stroke-width: 2px;
-}
-
-/* Scrollbar Styles */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+.animate-vibrate {
+  animation: vibrate 1s linear 1; /* Runs for 1 second and only once */
 }
