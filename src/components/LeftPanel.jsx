@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function LeftPanel() {
-  const [text, setText] = useState(false);
+  const [noMatch, setNoMatch] = useState(false);
   const [inputText, setInputText] = useState("");
   const [menuItems, setMenuItems] = useState([]);
 
@@ -25,10 +25,15 @@ function LeftPanel() {
     while ((match = regex.exec(text)) !== null) {
       items.push({ number: match[1].trim(), text: match[2].trim() });
     }
-
-    // console.log(items, text);
-
     setMenuItems(items);
+
+    if (!items || !items.length) {
+      setNoMatch(true);
+    }
+
+    setTimeout(() => {
+      setNoMatch(false);
+    }, 3000);
   };
 
   return (
@@ -40,7 +45,7 @@ function LeftPanel() {
         <h1 className="font-semibold">1. Menu Extraction</h1>
         <div className="text-input max-w-md mx-auto p-4 bg-white/50 backdrop-blur-lg border border-white/50 rounded-lg shadow-md mt-5">
           <textarea
-            className="w-full h-40 p-2 bg-white/60 outline-none text-colors-digital-gray/90 rounded-md border border-colors-digital-gray/20 focus:ring focus:ring-colors-matrix-green focus:ring-opacity-50"
+            className="w-full h-40 p-2 bg-white/60 outline-none text-colors-digital-gray/90 rounded-md border border-colors-digital-gray/20 focus:ring focus:ring-colors-matrix-green focus:ring-opacity-50 text-sm"
             style={{ boxShadow: "1px 1px 50px rgba(0, 0, 0, 0.1)" }}
             value={inputText}
             onChange={(evt) => handleInputChange(evt)}
@@ -58,7 +63,7 @@ function LeftPanel() {
             With the extractor button, each line will be identified to the menu
             items.
           </p>
-          {text && (
+          {noMatch && (
             <p className="text-red-500 text-sm animate-vibrate">
               No valid menu items found. Please check and try again.
             </p>
@@ -67,7 +72,7 @@ function LeftPanel() {
           <h2>Extracted Menu Items:</h2>
           <ul>
             {menuItems.map((item, index) => (
-              <li key={index}>
+              <li key={index} className="text-sm">
                 {item.number}. {item.text}
               </li>
             ))}
